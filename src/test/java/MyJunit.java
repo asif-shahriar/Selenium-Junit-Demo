@@ -128,8 +128,8 @@ public class MyJunit {
         driver.get("https://demoqa.com/links");
         driver.findElement(By.id("simpleLink")).click();
         Thread.sleep(5000);
-
         ArrayList<String> w = new ArrayList<String>(driver.getWindowHandles());
+
         //switch to new tab
         driver.switchTo().window(w.get(1));
         String title = driver.getTitle();
@@ -137,7 +137,6 @@ public class MyJunit {
         wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         Boolean status = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//img[@src='/images/Toolsqa.jpg']"))).isDisplayed();
-//        Boolean status = driver.findElement(By.xpath("//img[@src='/images/Toolsqa.jpg']")).isDisplayed();
         Assert.assertEquals(true, status);
         driver.close();
         driver.switchTo().window(w.get(0));
@@ -272,51 +271,9 @@ public class MyJunit {
         FileUtils.copyFile(screenshotFile, DestFile);
     }
 
-    @Test
-    public void fillUpForm() throws InterruptedException {
-        driver.get("https://demoqa.com/automation-practice-form");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("userForm"))).isDisplayed();
-        driver.findElement(By.id("firstName")).sendKeys("Jon");
-        driver.findElement(By.id("lastName")).sendKeys("Doe");
-        driver.findElement(By.id("userEmail")).sendKeys("jondoe@test.com");
-
-//        driver.findElement(By.id("gender-radio-1")).click();
-//
-//        driver.findElement(By.id("userNumber")).sendKeys("1234567899");
-//
-//        driver.findElement(By.id("dateOfBirthInput")).clear();
-//        driver.findElement(By.id("dateOfBirthInput")).sendKeys("05/08/1993");
-//        driver.findElement(By.id("dateOfBirthInput")).sendKeys(Keys.ENTER);
-//
-//
-//        WebElement subjectBox = driver.findElement(By.id("subjectsContainer"));
-//        Actions actions = new Actions(driver);
-//        actions.moveToElement(subjectBox).perform();
-//        Thread.sleep(1500);
-//        actions.sendKeys("c").perform();
-//        driver.findElement(By.xpath("//div[contains(text(),'Chemistry')]")).click();
-//
-//
-//        driver.findElement(By.id("hobbies-checkbox-1")).click();
-//        driver.findElement(By.id("hobbies-checkbox-3")).click();
-//
-//        WebElement uploadElement = driver.findElement(By.id("uploadPicture"));
-//        uploadElement.sendKeys("D://Road to SDET//x3gs81q5q8c81.png");
-//
-//        driver.findElement(By.id("currentAddress")).sendKeys("32 hover st. Michigan");
-
-        Select states = new Select(driver.findElement(By.id("state")));
-        states.selectByValue("2");
-
-        Thread.sleep(4000);
+    @After
+    public void closeBrowser() {
+        driver.close();
     }
-
-
-//    @After
-//    public void closeBrowser() {
-//        driver.close();
-//    }
-
 }
 
