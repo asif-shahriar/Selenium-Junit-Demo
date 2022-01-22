@@ -271,6 +271,47 @@ public class MyJunit {
         FileUtils.copyFile(screenshotFile, DestFile);
     }
 
+
+    @Test
+    public void fillUpForm() throws InterruptedException {
+        driver.get("https://demoqa.com/automation-practice-form");
+        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("userForm"))).isDisplayed();
+
+        //Name and email
+        driver.findElement(By.id("firstName")).sendKeys("Jon");
+        driver.findElement(By.id("lastName")).sendKeys("Doe");
+        driver.findElement(By.id("userEmail")).sendKeys("jondoe@test.com");
+
+        //Radio button
+        WebElement radio = driver.findElement(By.xpath("//label[contains(text(),'Male')]"));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        wait.until(ExpectedConditions.elementToBeClickable(radio));
+        radio.click();
+
+        //Mobile number
+        driver.findElement(By.id("userNumber")).sendKeys("1234567899");
+
+        //Date
+        driver.findElement(By.id("dateOfBirthInput")).clear();
+        driver.findElement(By.id("dateOfBirthInput")).sendKeys("05/08/1993");
+        driver.findElement(By.id("dateOfBirthInput")).sendKeys(Keys.ENTER);
+
+        //Upload pic
+        WebElement uploadElement = driver.findElement(By.id("uploadPicture"));
+        uploadElement.sendKeys("D://Road to SDET//x3gs81q5q8c81.png");
+
+        // Address
+        driver.findElement(By.id("currentAddress")).sendKeys("32 hover st. Michigan");
+
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//button[@id='submit']")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//button[@id='closeLargeModal']")).click();
+        Thread.sleep(2000);
+    }
+
+
     @After
     public void closeBrowser() {
         driver.close();
