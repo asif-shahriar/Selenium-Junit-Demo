@@ -77,13 +77,15 @@ public class MyJunit {
     }
 
     @Test
-    public void clickMultipleButton() {
+    public void clickMultipleButton() throws InterruptedException {
         driver.get("https://demoqa.com/buttons");
+        Thread.sleep(5000);
         List<WebElement> buttons = driver.findElements(By.tagName("button"));
         Actions actions = new Actions(driver);
         actions.doubleClick(buttons.get(1)).perform();
         actions.doubleClick(buttons.get(2)).perform();
         actions.doubleClick(buttons.get(3)).perform();
+        Thread.sleep(2500);
     }
 
     @Test
@@ -94,6 +96,7 @@ public class MyJunit {
         driver.findElement(By.id("confirmButton")).click();
         driver.switchTo().alert().dismiss();
         driver.findElement(By.id("promtButton")).click();
+        Thread.sleep(2000);
         driver.switchTo().alert().sendKeys("Jon Doe");
         Thread.sleep(2000);
         driver.switchTo().alert().accept();
@@ -104,9 +107,10 @@ public class MyJunit {
     }
 
     @Test
-    public void datePicker() {
+    public void datePicker() throws InterruptedException {
         driver.get("https://demoqa.com/date-picker");
         driver.findElement(By.id("dateAndTimePickerInput")).clear();
+        Thread.sleep(1500);
         driver.findElement(By.id("dateAndTimePickerInput")).sendKeys("05/08/1993 2:10 PM");
         driver.findElement(By.id("dateAndTimePickerInput")).sendKeys(Keys.ENTER);
     }
@@ -271,7 +275,6 @@ public class MyJunit {
         FileUtils.copyFile(screenshotFile, DestFile);
     }
 
-
     @Test
     public void fillUpForm() throws InterruptedException {
         driver.get("https://demoqa.com/automation-practice-form");
@@ -293,7 +296,9 @@ public class MyJunit {
         driver.findElement(By.id("userNumber")).sendKeys("1234567899");
 
         //Date
+        Thread.sleep(2000);
         driver.findElement(By.id("dateOfBirthInput")).clear();
+        Thread.sleep(2000);
         driver.findElement(By.id("dateOfBirthInput")).sendKeys("05/08/1993");
         driver.findElement(By.id("dateOfBirthInput")).sendKeys(Keys.ENTER);
 
@@ -304,11 +309,18 @@ public class MyJunit {
         // Address
         driver.findElement(By.id("currentAddress")).sendKeys("32 hover st. Michigan");
 
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//button[@id='submit']")).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//button[@id='closeLargeModal']")).click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
+        WebElement submit = driver.findElement(By.xpath("//button[@id='submit']"));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        wait.until(ExpectedConditions.elementToBeClickable(submit));
+        submit.click();
+
+        Thread.sleep(4000);
+        WebElement closeButton = driver.findElement(By.xpath("//button[@id='closeLargeModal']"));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        wait.until(ExpectedConditions.elementToBeClickable(closeButton));
+        closeButton.click();
+        Thread.sleep(3000);
     }
 
 
