@@ -1,6 +1,6 @@
 # Junit-Demo
 ## Prerequisites
-* Install jdk 1.8
+* Install jdk 1.8 or any LTS version
 * Configure **JAVA_HOME** and **GRADLE_HOME**
 
 ## How to run this project
