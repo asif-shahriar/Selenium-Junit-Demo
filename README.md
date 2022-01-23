@@ -5,7 +5,7 @@
 * Stable internet connection
 
 ## How to run this project
-* Cole the repo
+* Clone the repo
 * Open command in the root folder
 * Give the following command:
 ```
