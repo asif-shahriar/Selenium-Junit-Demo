@@ -1,6 +1,6 @@
 # Junit-Demo
 ## Prerequisites
-* Install jdk 1.8 or any LTS version
+* Install jdk 8 or any LTS version
 * Configure **JAVA_HOME** and **GRADLE_HOME**
 * Stable internet connection
 
